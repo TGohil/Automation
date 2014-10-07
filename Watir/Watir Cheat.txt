@@ -1,0 +1,102 @@
+### Can chain things together
+###EVerything defined in the container class.
+
+require 'watir'
+browser = Watir::Browser.new
+
+browser.methods - Object.new.methods
+
+browser.goto ""
+browser.back
+browser.forward
+
+browser.text
+browser.text.include? ""
+browser.status #status barl
+browser.text_field :name, "name"
+t = browser.text_field :name, "name"
+t = browser.text_field :name, /n.+/
+
+t.flash #highlight element in browser
+
+t.set "Hello"
+
+t.value
+t.id
+t.name
+
+t.exists? #check if element exists
+browser.text_field{:name, /helo.+/).exists?
+t.visible?
+t.present?
+t.readonly?
+t.disabled?
+t.enabled?
+
+###	danger using text matcher on multi language site. Better to match against id, class or name.
+
+b = browser.button :text, "A Button"
+b.click
+b.when_present.clck
+browser.button(:name,"A Button").when_present.tab_index == "1"
+
+
+d = browser.select_list :id, "select-choice"
+d.select "Choice 3"
+d.clear ### for multi-select
+
+
+c = browser.checkbox :name, "checkbox"
+c.set
+c.clear
+
+SPARTAGLOBAL CONTACTFORMS
+td = browser.table
+td[0]
+td[0][1].text
+
+
+CSS SELECTORS
+browser.element(css: ".page-header")
+browser.element(css: ".page-header").text
+
+browser.element(css: ".page-header h1").html
+browser.element(css: ".page-header h1").text
+
+browser.element(css: "p")
+browser.elements(css: "p")
+ps = browser.elements(css: "p") ### Capturing all paragraphs on page
+ps[1].text
+ps.size
+
+browser.buttons
+browser.buttons.size
+browser.each {|b| puts b.text}
+
+ph = browser.header :cass, "page-header"
+ph.nav
+ph.nav.lis
+ph.nav.lis.last
+ph.nav.lis.last.a
+ph.nav.lis.last.a.href
+ph.nav.lis.each {|li| puts li.a.href} ### lists the different link from loop
+
+###	Container class contains all to do with html tags, pun intended!
+
+
+WAIT
+require 'selenium-webdriver'
+browser.driver.manage.implicit_wait = 3
+
+
+browser = Water::Browser.start 'bit.ly/watir-webdriver-demo'
+browser.text_field(id: 'entry_0').when_present.set 'your_name'
+browser.text_field(id: 'entry_100000').when_present.set 'your_name'
+browser.select__list(id: 'entry_1').wait_until_present
+browser.button(:value => 'Submit').wait_while_present
+
+
+wait = Watir::Wait
+wait.until_present
+
+browser.close

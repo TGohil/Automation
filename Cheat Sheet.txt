@@ -1,0 +1,33 @@
+require 'selenium-webdriver'
+
+browser = Selenium::WebDriver.for :firefox
+browser.get "http://lacedeamon.sartaglobal.com/example_forms"
+
+browser.find_element name: "emails"
+browser.find_element tag_name: "h1"
+browser.find_elements tag_name: "p"
+
+my_para = browser.find_element css: ".pageheading p"
+my_para.text
+
+my_para.location
+my_para.location[:x]
+
+my_para.size
+my_para.size[:height]
+
+my_para.click
+my_para.displayed?
+
+my_para.methods - Objects.new.methods
+my_para.css_value "color"/"width"/"position"
+
+
+
+CSS SELECTORS
+"div[id=result_]"
+
+WAIT
+wait = Selenium::WebDriver::Wait.new(timeout: 10)
+wait.until {browser.find_element(tag_name: "h1")}
+a = wait.until {browser.find_element(tag_name: "h1")}
