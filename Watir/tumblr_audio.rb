@@ -13,9 +13,8 @@ browser.a(:id, "tab_audio_external").click
 browser.text_field(:id, "post_three").send_keys("https://soundcloud.com/elizabethsilv/ruby-kaiser-chiefs")
 browser.button(:class, "create_post_button chrome blue txt ").click
 
-#browser.div(:class, "singleSound g-box-full").wait_until_present
-#if browser.div(:class, "singleSound g-box-full").is_present?
- #   puts "SUCCESS"
-#end
+browser.a(:class, "post_info_link post_source_link").wait_until_present
 
-#browser.close
+puts "SUCCESS" if browser.a(:class, "post_info_link post_source_link").text.include? "SoundCloud / elizabethsilv"
+
+browser.close
